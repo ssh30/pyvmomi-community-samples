@@ -11,6 +11,15 @@ from pyVim.connect import SmartConnect, Disconnect
 import atexit
 import argparse
 import getpass
+import ssl
+import requests 
+
+# Disable urllib3 ssl warnings
+requests.packages.urllib3.disable_warnings()
+ 
+# Disable SSL certs verification
+context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
+context.verify_mode = ssl.CERT_NONE
 
 
 def get_args():
@@ -200,7 +209,8 @@ def main():
         host=args.host,
         user=args.user,
         pwd=args.password,
-        port=args.port)
+        port=args.port,
+        sslContext=context))
     # disconnect this thing
     atexit.register(Disconnect, si)
 
