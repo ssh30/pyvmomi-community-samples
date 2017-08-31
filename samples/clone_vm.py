@@ -210,7 +210,7 @@ def main():
         user=args.user,
         pwd=args.password,
         port=args.port,
-        sslContext=context))
+        sslContext=context)
     # disconnect this thing
     atexit.register(Disconnect, si)
 
